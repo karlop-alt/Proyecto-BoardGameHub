@@ -10,7 +10,7 @@ class Producto(models.Model):
     ]
     nombre = models.CharField(max_length=100)
     precio = models.DecimalField(max_digits=6, decimal_places=2)
-    categoria = models.CharField(max_length=10, choices=CATEGORIAS)
+    categoria = models.CharField(max_length=20, choices=CATEGORIAS)
     disponible = models.BooleanField(default=True)
 
     def __str__(self):
