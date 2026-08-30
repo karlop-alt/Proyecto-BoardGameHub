@@ -1,6 +1,11 @@
 from django.contrib import admin
 from .models import Producto, Pedido
 
+admin.site.site_header = "Admon BoardGameHub"
+admin.site.site_title = "Panel BoardGameHub"
+admin.site.index_title = "Control de Operaciones"
+
+
 @admin.register(Producto)
 class ProductoAdmin(admin.ModelAdmin):
     list_display = ('id', 'nombre', 'precio', 'categoria', 'disponible')
