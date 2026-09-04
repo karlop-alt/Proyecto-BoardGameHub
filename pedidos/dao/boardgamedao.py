@@ -33,11 +33,13 @@ class PedidoDAO:
         cliente_nombre: str,
         producto_id: int
     ) -> Optional[Pedido]:
+
         producto = ProductoDAO.obtener_por_id(producto_id)
 
         if producto:
             return Pedido.objects.create(
                 cliente_nombre=cliente_nombre,
+                producto=producto,
                 total=producto.precio
             )
 
@@ -48,10 +50,12 @@ class PedidoDAO:
         pedido_id: int,
         nuevo_estado: str
     ) -> Optional[Pedido]:
+
         try:
             pedido = Pedido.objects.get(id=pedido_id)
             pedido.estado = nuevo_estado
             pedido.save()
             return pedido
+
         except Pedido.DoesNotExist:
             return None
