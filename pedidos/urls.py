@@ -9,7 +9,7 @@ router.register(r'api/pedidos', views.PedidoViewSet, basename='api_pedidos')
 urlpatterns = [
     # Rutas Web (HTML)
     path('', views.catalogo_view, name='catalogo'),
-    path('pedidos/', views.pedidos_view, name='pedidos'),
+    path('pedidos/', views.catalogo_view, name='pedidos'),
     path('pedido/nuevo/', views.crear_pedido_action, name='crear_pedido'),
     path('pedido/<int:pedido_id>/estado/', views.cambiar_estado_action, name='cambiar_estado'),
     
