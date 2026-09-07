@@ -26,15 +26,24 @@ class PedidoDAO:
 
     @staticmethod
     def obtener_todos() -> List[Pedido]:
-        #return Pedido.objects.all().order_by('-fecha')
-        return Pedido.objects.select_related('producto').all().order_by('-creado_en')
+        return (
+            Pedido.objects
+            .select_related('producto')
+            .all()
+            .order_by('-fecha')
+        )
 
     @staticmethod
-    def obtener_pendientes_o_en_preparacion() -> List[Pedido]:
-        # NUEVO MÉTODO: Trae solo comandas activas para el panel de cocina
-        return Pedido.objects.select_related('producto').filter(
-            estado__in=['RECIBIDO', 'EN_TRANSITO']
-        ).order_by('-fecha')
+    def obtener_pedidos_activos() -> List[Pedido]:
+        """Obtiene los pedidos que todavía no han sido entregados"""
+        return (
+            Pedido.objects
+            .select_related('producto')
+            .filter(
+                estado__in=['RECIBIDO', 'EN_TRANSITO', 'LISTO']
+            )
+            .order_by('fecha')
+        )
 
     @staticmethod
     def crear_pedido_con_producto(
